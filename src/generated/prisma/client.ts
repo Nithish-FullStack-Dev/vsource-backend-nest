@@ -49,3 +49,18 @@ export type User = Prisma.UserModel
  * 
  */
 export type Lead = Prisma.LeadModel
+/**
+ * Model Student
+ * 
+ */
+export type Student = Prisma.StudentModel
+/**
+ * Model Branch
+ * 
+ */
+export type Branch = Prisma.BranchModel
+/**
+ * Model StudentTimeline
+ * 
+ */
+export type StudentTimeline = Prisma.StudentTimelineModel
