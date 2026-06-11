@@ -171,7 +171,7 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   role: $Enums.UserRole
-  branchId: string
+  branchId: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -203,10 +203,10 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  branchId?: Prisma.StringFilter<"User"> | string
+  branchId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   assignedLeads?: Prisma.LeadListRelationFilter
   students?: Prisma.StudentListRelationFilter
   timeline?: Prisma.StudentTimelineListRelationFilter
@@ -218,7 +218,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  branchId?: Prisma.SortOrder
+  branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   branch?: Prisma.BranchOrderByWithRelationInput
@@ -236,10 +236,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  branchId?: Prisma.StringFilter<"User"> | string
+  branchId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   assignedLeads?: Prisma.LeadListRelationFilter
   students?: Prisma.StudentListRelationFilter
   timeline?: Prisma.StudentTimelineListRelationFilter
@@ -251,7 +251,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  branchId?: Prisma.SortOrder
+  branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -268,7 +268,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
-  branchId?: Prisma.StringWithAggregatesFilter<"User"> | string
+  branchId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -278,10 +278,10 @@ export type UserCreateInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  branch: Prisma.BranchCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedCounselorInput
   students?: Prisma.StudentCreateNestedManyWithoutCounselorInput
   timeline?: Prisma.StudentTimelineCreateNestedManyWithoutCreatedByInput
@@ -292,8 +292,8 @@ export type UserUncheckedCreateInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
-  branchId: string
+  role: $Enums.UserRole
+  branchId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedCounselorInput
@@ -309,7 +309,7 @@ export type UserUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branch?: Prisma.BranchUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedCounselorNestedInput
   students?: Prisma.StudentUpdateManyWithoutCounselorNestedInput
   timeline?: Prisma.StudentTimelineUpdateManyWithoutCreatedByNestedInput
@@ -321,7 +321,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedCounselorNestedInput
@@ -334,8 +334,8 @@ export type UserCreateManyInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
-  branchId: string
+  role: $Enums.UserRole
+  branchId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -356,7 +356,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,6 +419,10 @@ export type EnumUserRoleFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedOneWithoutAssignedLeadsInput = {
@@ -516,10 +520,10 @@ export type UserCreateWithoutAssignedLeadsInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  branch: Prisma.BranchCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
   students?: Prisma.StudentCreateNestedManyWithoutCounselorInput
   timeline?: Prisma.StudentTimelineCreateNestedManyWithoutCreatedByInput
 }
@@ -529,8 +533,8 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
-  branchId: string
+  role: $Enums.UserRole
+  branchId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutCounselorInput
@@ -561,7 +565,7 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branch?: Prisma.BranchUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
   students?: Prisma.StudentUpdateManyWithoutCounselorNestedInput
   timeline?: Prisma.StudentTimelineUpdateManyWithoutCreatedByNestedInput
 }
@@ -572,7 +576,7 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentUncheckedUpdateManyWithoutCounselorNestedInput
@@ -584,10 +588,10 @@ export type UserCreateWithoutStudentsInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  branch: Prisma.BranchCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedCounselorInput
   timeline?: Prisma.StudentTimelineCreateNestedManyWithoutCreatedByInput
 }
@@ -597,8 +601,8 @@ export type UserUncheckedCreateWithoutStudentsInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
-  branchId: string
+  role: $Enums.UserRole
+  branchId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedCounselorInput
@@ -629,7 +633,7 @@ export type UserUpdateWithoutStudentsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branch?: Prisma.BranchUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedCounselorNestedInput
   timeline?: Prisma.StudentTimelineUpdateManyWithoutCreatedByNestedInput
 }
@@ -640,7 +644,7 @@ export type UserUncheckedUpdateWithoutStudentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedCounselorNestedInput
@@ -652,7 +656,7 @@ export type UserCreateWithoutBranchInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedCounselorInput
@@ -665,7 +669,7 @@ export type UserUncheckedCreateWithoutBranchInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedCounselorInput
@@ -708,7 +712,7 @@ export type UserScalarWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  branchId?: Prisma.StringFilter<"User"> | string
+  branchId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
@@ -718,10 +722,10 @@ export type UserCreateWithoutTimelineInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
-  branch: Prisma.BranchCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedCounselorInput
   students?: Prisma.StudentCreateNestedManyWithoutCounselorInput
 }
@@ -731,8 +735,8 @@ export type UserUncheckedCreateWithoutTimelineInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
-  branchId: string
+  role: $Enums.UserRole
+  branchId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedCounselorInput
@@ -763,7 +767,7 @@ export type UserUpdateWithoutTimelineInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branch?: Prisma.BranchUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedCounselorNestedInput
   students?: Prisma.StudentUpdateManyWithoutCounselorNestedInput
 }
@@ -774,7 +778,7 @@ export type UserUncheckedUpdateWithoutTimelineInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedCounselorNestedInput
@@ -786,7 +790,7 @@ export type UserCreateManyBranchInput = {
   name: string
   email: string
   password: string
-  role?: $Enums.UserRole
+  role: $Enums.UserRole
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -885,7 +889,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   branchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
   assignedLeads?: boolean | Prisma.User$assignedLeadsArgs<ExtArgs>
   students?: boolean | Prisma.User$studentsArgs<ExtArgs>
   timeline?: boolean | Prisma.User$timelineArgs<ExtArgs>
@@ -901,7 +905,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   branchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -913,7 +917,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   branchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -929,23 +933,23 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "branchId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
   assignedLeads?: boolean | Prisma.User$assignedLeadsArgs<ExtArgs>
   students?: boolean | Prisma.User$studentsArgs<ExtArgs>
   timeline?: boolean | Prisma.User$timelineArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  branch?: boolean | Prisma.User$branchArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    branch: Prisma.$BranchPayload<ExtArgs>
+    branch: Prisma.$BranchPayload<ExtArgs> | null
     assignedLeads: Prisma.$LeadPayload<ExtArgs>[]
     students: Prisma.$StudentPayload<ExtArgs>[]
     timeline: Prisma.$StudentTimelinePayload<ExtArgs>[]
@@ -956,7 +960,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     password: string
     role: $Enums.UserRole
-    branchId: string
+    branchId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1353,7 +1357,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  branch<T extends Prisma.BranchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BranchDefaultArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  branch<T extends Prisma.User$branchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$branchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedLeads<T extends Prisma.User$assignedLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   students<T extends Prisma.User$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timeline<T extends Prisma.User$timelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$timelineArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentTimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1792,6 +1796,25 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.branch
+ */
+export type User$branchArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
 }
 
 /**
