@@ -10,7 +10,6 @@ import {
 } from 'class-validator';
 import { LeadStatus } from 'src/generated/prisma/enums';
 
-
 export class CreateLeadDto {
   @IsOptional()
   @IsString()
@@ -133,7 +132,7 @@ export class CreateLeadDto {
   source?: string;
 
   @IsString()
-  branchId!: string;
+  branchId?: string;
 
   @IsOptional()
   @IsEnum(LeadStatus)

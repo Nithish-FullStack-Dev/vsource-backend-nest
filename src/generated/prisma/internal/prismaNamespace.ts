@@ -900,6 +900,9 @@ export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeo
 export const BranchScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
+  city: 'city',
+  address: 'address',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

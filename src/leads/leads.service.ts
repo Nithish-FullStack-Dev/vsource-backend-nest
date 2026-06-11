@@ -30,11 +30,74 @@ export class LeadsService {
 
     return this.prisma.lead.create({
       data: {
-        ...dto,
         leadNumber,
+
+        studentName: dto.studentName,
+        mobileNumber: dto.mobileNumber,
+        emailId: dto.emailId,
+
+        place: dto.place,
+        passport: dto.passport,
+
+        source: dto.source,
+
+        branch: {
+          connect: {
+            id: dto.branchId!,
+          },
+        },
+
+        assignedCounselor: dto.assignedCounselorId
+          ? {
+              connect: {
+                id: dto.assignedCounselorId,
+              },
+            }
+          : undefined,
+
         counsellingDate: dto.counsellingDate
           ? new Date(dto.counsellingDate)
           : null,
+
+        tenthPercentage: dto.tenthPercentage,
+        tenthYearOfPassing: dto.tenthYearOfPassing,
+
+        twelfthPercentage: dto.twelfthPercentage,
+        twelfthYearOfPassing: dto.twelfthYearOfPassing,
+
+        bachelorsCourse: dto.bachelorsCourse,
+        bachelorsUniversityName: dto.bachelorsUniversityName,
+
+        bachelorsPercentage: dto.bachelorsPercentage,
+        bachelorsYearOfPassing: dto.bachelorsYearOfPassing,
+
+        backlogs: dto.backlogs,
+
+        workExperience: dto.workExperience,
+
+        preferredCountry: dto.preferredCountry,
+        preferredIntake: dto.preferredIntake,
+        preferredCourse: dto.preferredCourse,
+
+        greGmatScore: dto.greGmatScore,
+        quantitativeScore: dto.quantitativeScore,
+        verbalScore: dto.verbalScore,
+        analyticalWritingScore: dto.analyticalWritingScore,
+
+        englishTestType: dto.englishTestType,
+
+        listeningScore: dto.listeningScore,
+        readingScore: dto.readingScore,
+        writingScore: dto.writingScore,
+        speakingScore: dto.speakingScore,
+
+        gapsIfAny: dto.gapsIfAny,
+
+        status: dto.status,
+
+        remarks: dto.remarks,
+
+        nextFollowup: dto.nextFollowup ? new Date(dto.nextFollowup) : null,
       },
     });
   }

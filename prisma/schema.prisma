@@ -13,6 +13,7 @@ datasource db {
 }
 
 enum UserRole {
+  super_admin
   admin
   counselor
 }
@@ -43,10 +44,11 @@ model User {
   email    String @unique
   password String
 
-  role UserRole @default(counselor)
+  role UserRole
 
-  branchId String
-  branch   Branch @relation(fields: [branchId], references: [id])
+  branchId String?
+
+  branch Branch? @relation(fields: [branchId], references: [id])
 
   assignedLeads Lead[] @relation("CounselorLeads")
 
@@ -170,7 +172,11 @@ model Student {
 model Branch {
   id String @id @default(uuid())
 
-  name String @unique
+  name    String @unique
+  code    String @unique
+
+  city    String?
+  address String?
 
   users    User[]
   leads    Lead[]
