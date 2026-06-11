@@ -10,4 +10,7 @@
  */
 export type * from './models/User'
 export type * from './models/Lead'
+export type * from './models/Student'
+export type * from './models/Branch'
+export type * from './models/StudentTimeline'
 export type * from './commonInputTypes'

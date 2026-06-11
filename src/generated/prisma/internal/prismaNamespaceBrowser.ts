@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Lead: 'Lead'
+  Lead: 'Lead',
+  Student: 'Student',
+  Branch: 'Branch',
+  StudentTimeline: 'StudentTimeline'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -77,6 +80,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
+  branchId: 'branchId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -86,11 +90,18 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const LeadScalarFieldEnum = {
   id: 'id',
+  leadNumber: 'leadNumber',
+  counsellingDate: 'counsellingDate',
   studentName: 'studentName',
   mobileNumber: 'mobileNumber',
   emailId: 'emailId',
   place: 'place',
   passport: 'passport',
+  source: 'source',
+  branchId: 'branchId',
+  assignedCounselorId: 'assignedCounselorId',
+  isConverted: 'isConverted',
+  convertedAt: 'convertedAt',
   tenthPercentage: 'tenthPercentage',
   tenthYearOfPassing: 'tenthYearOfPassing',
   twelfthPercentage: 'twelfthPercentage',
@@ -114,11 +125,59 @@ export const LeadScalarFieldEnum = {
   readingScore: 'readingScore',
   speakingScore: 'speakingScore',
   gapsIfAny: 'gapsIfAny',
+  status: 'status',
+  nextFollowup: 'nextFollowup',
+  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const StudentScalarFieldEnum = {
+  id: 'id',
+  studentNumber: 'studentNumber',
+  leadId: 'leadId',
+  branchId: 'branchId',
+  counselorId: 'counselorId',
+  studentName: 'studentName',
+  mobileNumber: 'mobileNumber',
+  emailId: 'emailId',
+  preferredCountry: 'preferredCountry',
+  preferredCourse: 'preferredCourse',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const BranchScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
+
+
+export const StudentTimelineScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  followupDate: 'followupDate',
+  oldValue: 'oldValue',
+  newValue: 'newValue',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type StudentTimelineScalarFieldEnum = (typeof StudentTimelineScalarFieldEnum)[keyof typeof StudentTimelineScalarFieldEnum]
 
 
 export const SortOrder = {

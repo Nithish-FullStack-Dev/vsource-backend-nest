@@ -15,3 +15,46 @@ export const UserRole = {
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const LeadStatus = {
+  draft: 'draft',
+  new: 'new',
+  contacted: 'contacted',
+  qualified: 'qualified',
+  converted: 'converted',
+  lost: 'lost'
+} as const
+
+export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
+
+
+export const StudentStatus = {
+  active: 'active',
+  visa_process: 'visa_process',
+  loan_process: 'loan_process',
+  admitted: 'admitted',
+  enrolled: 'enrolled',
+  completed: 'completed',
+  dropped: 'dropped'
+} as const
+
+export type StudentStatus = (typeof StudentStatus)[keyof typeof StudentStatus]
+
+
+export const TimelineType = {
+  note: 'note',
+  followup: 'followup',
+  call: 'call',
+  meeting: 'meeting',
+  status_change: 'status_change',
+  document: 'document',
+  application: 'application',
+  offer_letter: 'offer_letter',
+  loan: 'loan',
+  visa: 'visa',
+  payment: 'payment',
+  system: 'system'
+} as const
+
+export type TimelineType = (typeof TimelineType)[keyof typeof TimelineType]

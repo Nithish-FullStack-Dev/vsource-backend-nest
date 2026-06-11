@@ -64,11 +64,18 @@ export type LeadSumAggregateOutputType = {
 
 export type LeadMinAggregateOutputType = {
   id: string | null
+  leadNumber: string | null
+  counsellingDate: Date | null
   studentName: string | null
   mobileNumber: string | null
   emailId: string | null
   place: string | null
   passport: string | null
+  source: string | null
+  branchId: string | null
+  assignedCounselorId: string | null
+  isConverted: boolean | null
+  convertedAt: Date | null
   tenthPercentage: number | null
   tenthYearOfPassing: number | null
   twelfthPercentage: number | null
@@ -92,17 +99,27 @@ export type LeadMinAggregateOutputType = {
   readingScore: number | null
   speakingScore: number | null
   gapsIfAny: string | null
+  status: $Enums.LeadStatus | null
+  nextFollowup: Date | null
+  remarks: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type LeadMaxAggregateOutputType = {
   id: string | null
+  leadNumber: string | null
+  counsellingDate: Date | null
   studentName: string | null
   mobileNumber: string | null
   emailId: string | null
   place: string | null
   passport: string | null
+  source: string | null
+  branchId: string | null
+  assignedCounselorId: string | null
+  isConverted: boolean | null
+  convertedAt: Date | null
   tenthPercentage: number | null
   tenthYearOfPassing: number | null
   twelfthPercentage: number | null
@@ -126,17 +143,27 @@ export type LeadMaxAggregateOutputType = {
   readingScore: number | null
   speakingScore: number | null
   gapsIfAny: string | null
+  status: $Enums.LeadStatus | null
+  nextFollowup: Date | null
+  remarks: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type LeadCountAggregateOutputType = {
   id: number
+  leadNumber: number
+  counsellingDate: number
   studentName: number
   mobileNumber: number
   emailId: number
   place: number
   passport: number
+  source: number
+  branchId: number
+  assignedCounselorId: number
+  isConverted: number
+  convertedAt: number
   tenthPercentage: number
   tenthYearOfPassing: number
   twelfthPercentage: number
@@ -160,6 +187,9 @@ export type LeadCountAggregateOutputType = {
   readingScore: number
   speakingScore: number
   gapsIfAny: number
+  status: number
+  nextFollowup: number
+  remarks: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -204,11 +234,18 @@ export type LeadSumAggregateInputType = {
 
 export type LeadMinAggregateInputType = {
   id?: true
+  leadNumber?: true
+  counsellingDate?: true
   studentName?: true
   mobileNumber?: true
   emailId?: true
   place?: true
   passport?: true
+  source?: true
+  branchId?: true
+  assignedCounselorId?: true
+  isConverted?: true
+  convertedAt?: true
   tenthPercentage?: true
   tenthYearOfPassing?: true
   twelfthPercentage?: true
@@ -232,17 +269,27 @@ export type LeadMinAggregateInputType = {
   readingScore?: true
   speakingScore?: true
   gapsIfAny?: true
+  status?: true
+  nextFollowup?: true
+  remarks?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type LeadMaxAggregateInputType = {
   id?: true
+  leadNumber?: true
+  counsellingDate?: true
   studentName?: true
   mobileNumber?: true
   emailId?: true
   place?: true
   passport?: true
+  source?: true
+  branchId?: true
+  assignedCounselorId?: true
+  isConverted?: true
+  convertedAt?: true
   tenthPercentage?: true
   tenthYearOfPassing?: true
   twelfthPercentage?: true
@@ -266,17 +313,27 @@ export type LeadMaxAggregateInputType = {
   readingScore?: true
   speakingScore?: true
   gapsIfAny?: true
+  status?: true
+  nextFollowup?: true
+  remarks?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type LeadCountAggregateInputType = {
   id?: true
+  leadNumber?: true
+  counsellingDate?: true
   studentName?: true
   mobileNumber?: true
   emailId?: true
   place?: true
   passport?: true
+  source?: true
+  branchId?: true
+  assignedCounselorId?: true
+  isConverted?: true
+  convertedAt?: true
   tenthPercentage?: true
   tenthYearOfPassing?: true
   twelfthPercentage?: true
@@ -300,6 +357,9 @@ export type LeadCountAggregateInputType = {
   readingScore?: true
   speakingScore?: true
   gapsIfAny?: true
+  status?: true
+  nextFollowup?: true
+  remarks?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -393,11 +453,18 @@ export type LeadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type LeadGroupByOutputType = {
   id: string
+  leadNumber: string
+  counsellingDate: Date | null
   studentName: string | null
   mobileNumber: string | null
   emailId: string | null
   place: string | null
   passport: string | null
+  source: string | null
+  branchId: string
+  assignedCounselorId: string | null
+  isConverted: boolean
+  convertedAt: Date | null
   tenthPercentage: number | null
   tenthYearOfPassing: number | null
   twelfthPercentage: number | null
@@ -421,6 +488,9 @@ export type LeadGroupByOutputType = {
   readingScore: number | null
   speakingScore: number | null
   gapsIfAny: string | null
+  status: $Enums.LeadStatus
+  nextFollowup: Date | null
+  remarks: string | null
   createdAt: Date
   updatedAt: Date
   _count: LeadCountAggregateOutputType | null
@@ -450,11 +520,18 @@ export type LeadWhereInput = {
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   id?: Prisma.StringFilter<"Lead"> | string
+  leadNumber?: Prisma.StringFilter<"Lead"> | string
+  counsellingDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   studentName?: Prisma.StringNullableFilter<"Lead"> | string | null
   mobileNumber?: Prisma.StringNullableFilter<"Lead"> | string | null
   emailId?: Prisma.StringNullableFilter<"Lead"> | string | null
   place?: Prisma.StringNullableFilter<"Lead"> | string | null
   passport?: Prisma.StringNullableFilter<"Lead"> | string | null
+  source?: Prisma.StringNullableFilter<"Lead"> | string | null
+  branchId?: Prisma.StringFilter<"Lead"> | string
+  assignedCounselorId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  isConverted?: Prisma.BoolFilter<"Lead"> | boolean
+  convertedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   tenthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
   tenthYearOfPassing?: Prisma.IntNullableFilter<"Lead"> | number | null
   twelfthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
@@ -478,17 +555,30 @@ export type LeadWhereInput = {
   readingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
   speakingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
   gapsIfAny?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  nextFollowup?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  assignedCounselor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  student?: Prisma.XOR<Prisma.StudentNullableScalarRelationFilter, Prisma.StudentWhereInput> | null
 }
 
 export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  leadNumber?: Prisma.SortOrder
+  counsellingDate?: Prisma.SortOrderInput | Prisma.SortOrder
   studentName?: Prisma.SortOrderInput | Prisma.SortOrder
   mobileNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   emailId?: Prisma.SortOrderInput | Prisma.SortOrder
   place?: Prisma.SortOrderInput | Prisma.SortOrder
   passport?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  branchId?: Prisma.SortOrder
+  assignedCounselorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isConverted?: Prisma.SortOrder
+  convertedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   tenthPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   tenthYearOfPassing?: Prisma.SortOrderInput | Prisma.SortOrder
   twelfthPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -512,20 +602,33 @@ export type LeadOrderByWithRelationInput = {
   readingScore?: Prisma.SortOrderInput | Prisma.SortOrder
   speakingScore?: Prisma.SortOrderInput | Prisma.SortOrder
   gapsIfAny?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  nextFollowup?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  branch?: Prisma.BranchOrderByWithRelationInput
+  assignedCounselor?: Prisma.UserOrderByWithRelationInput
+  student?: Prisma.StudentOrderByWithRelationInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  leadNumber?: string
   AND?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
+  counsellingDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   studentName?: Prisma.StringNullableFilter<"Lead"> | string | null
   mobileNumber?: Prisma.StringNullableFilter<"Lead"> | string | null
   emailId?: Prisma.StringNullableFilter<"Lead"> | string | null
   place?: Prisma.StringNullableFilter<"Lead"> | string | null
   passport?: Prisma.StringNullableFilter<"Lead"> | string | null
+  source?: Prisma.StringNullableFilter<"Lead"> | string | null
+  branchId?: Prisma.StringFilter<"Lead"> | string
+  assignedCounselorId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  isConverted?: Prisma.BoolFilter<"Lead"> | boolean
+  convertedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   tenthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
   tenthYearOfPassing?: Prisma.IntNullableFilter<"Lead"> | number | null
   twelfthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
@@ -549,17 +652,30 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   readingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
   speakingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
   gapsIfAny?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  nextFollowup?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
-}, "id">
+  branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  assignedCounselor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  student?: Prisma.XOR<Prisma.StudentNullableScalarRelationFilter, Prisma.StudentWhereInput> | null
+}, "id" | "leadNumber">
 
 export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  leadNumber?: Prisma.SortOrder
+  counsellingDate?: Prisma.SortOrderInput | Prisma.SortOrder
   studentName?: Prisma.SortOrderInput | Prisma.SortOrder
   mobileNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   emailId?: Prisma.SortOrderInput | Prisma.SortOrder
   place?: Prisma.SortOrderInput | Prisma.SortOrder
   passport?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  branchId?: Prisma.SortOrder
+  assignedCounselorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isConverted?: Prisma.SortOrder
+  convertedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   tenthPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
   tenthYearOfPassing?: Prisma.SortOrderInput | Prisma.SortOrder
   twelfthPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -583,6 +699,9 @@ export type LeadOrderByWithAggregationInput = {
   readingScore?: Prisma.SortOrderInput | Prisma.SortOrder
   speakingScore?: Prisma.SortOrderInput | Prisma.SortOrder
   gapsIfAny?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  nextFollowup?: Prisma.SortOrderInput | Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
@@ -597,11 +716,18 @@ export type LeadScalarWhereWithAggregatesInput = {
   OR?: Prisma.LeadScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LeadScalarWhereWithAggregatesInput | Prisma.LeadScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  leadNumber?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  counsellingDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
   studentName?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   mobileNumber?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   emailId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   place?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   passport?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  source?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  branchId?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  assignedCounselorId?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  isConverted?: Prisma.BoolWithAggregatesFilter<"Lead"> | boolean
+  convertedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
   tenthPercentage?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   tenthYearOfPassing?: Prisma.IntNullableWithAggregatesFilter<"Lead"> | number | null
   twelfthPercentage?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
@@ -625,17 +751,25 @@ export type LeadScalarWhereWithAggregatesInput = {
   readingScore?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   speakingScore?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   gapsIfAny?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
+  nextFollowup?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+  remarks?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
 }
 
 export type LeadCreateInput = {
   id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
   studentName?: string | null
   mobileNumber?: string | null
   emailId?: string | null
   place?: string | null
   passport?: string | null
+  source?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
   tenthPercentage?: number | null
   tenthYearOfPassing?: number | null
   twelfthPercentage?: number | null
@@ -659,17 +793,30 @@ export type LeadCreateInput = {
   readingScore?: number | null
   speakingScore?: number | null
   gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  branch: Prisma.BranchCreateNestedOneWithoutLeadsInput
+  assignedCounselor?: Prisma.UserCreateNestedOneWithoutAssignedLeadsInput
+  student?: Prisma.StudentCreateNestedOneWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
   id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
   studentName?: string | null
   mobileNumber?: string | null
   emailId?: string | null
   place?: string | null
   passport?: string | null
+  source?: string | null
+  branchId: string
+  assignedCounselorId?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
   tenthPercentage?: number | null
   tenthYearOfPassing?: number | null
   twelfthPercentage?: number | null
@@ -693,17 +840,26 @@ export type LeadUncheckedCreateInput = {
   readingScore?: number | null
   speakingScore?: number | null
   gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  student?: Prisma.StudentUncheckedCreateNestedOneWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -727,17 +883,30 @@ export type LeadUpdateInput = {
   readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branch?: Prisma.BranchUpdateOneRequiredWithoutLeadsNestedInput
+  assignedCounselor?: Prisma.UserUpdateOneWithoutAssignedLeadsNestedInput
+  student?: Prisma.StudentUpdateOneWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedCounselorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -761,17 +930,28 @@ export type LeadUncheckedUpdateInput = {
   readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  student?: Prisma.StudentUncheckedUpdateOneWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
   id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
   studentName?: string | null
   mobileNumber?: string | null
   emailId?: string | null
   place?: string | null
   passport?: string | null
+  source?: string | null
+  branchId: string
+  assignedCounselorId?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
   tenthPercentage?: number | null
   tenthYearOfPassing?: number | null
   twelfthPercentage?: number | null
@@ -795,17 +975,25 @@ export type LeadCreateManyInput = {
   readingScore?: number | null
   speakingScore?: number | null
   gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -829,17 +1017,27 @@ export type LeadUpdateManyMutationInput = {
   readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedCounselorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -863,17 +1061,37 @@ export type LeadUncheckedUpdateManyInput = {
   readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type LeadListRelationFilter = {
+  every?: Prisma.LeadWhereInput
+  some?: Prisma.LeadWhereInput
+  none?: Prisma.LeadWhereInput
+}
+
+export type LeadOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  leadNumber?: Prisma.SortOrder
+  counsellingDate?: Prisma.SortOrder
   studentName?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   emailId?: Prisma.SortOrder
   place?: Prisma.SortOrder
   passport?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  branchId?: Prisma.SortOrder
+  assignedCounselorId?: Prisma.SortOrder
+  isConverted?: Prisma.SortOrder
+  convertedAt?: Prisma.SortOrder
   tenthPercentage?: Prisma.SortOrder
   tenthYearOfPassing?: Prisma.SortOrder
   twelfthPercentage?: Prisma.SortOrder
@@ -897,6 +1115,9 @@ export type LeadCountOrderByAggregateInput = {
   readingScore?: Prisma.SortOrder
   speakingScore?: Prisma.SortOrder
   gapsIfAny?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  nextFollowup?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -921,11 +1142,18 @@ export type LeadAvgOrderByAggregateInput = {
 
 export type LeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  leadNumber?: Prisma.SortOrder
+  counsellingDate?: Prisma.SortOrder
   studentName?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   emailId?: Prisma.SortOrder
   place?: Prisma.SortOrder
   passport?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  branchId?: Prisma.SortOrder
+  assignedCounselorId?: Prisma.SortOrder
+  isConverted?: Prisma.SortOrder
+  convertedAt?: Prisma.SortOrder
   tenthPercentage?: Prisma.SortOrder
   tenthYearOfPassing?: Prisma.SortOrder
   twelfthPercentage?: Prisma.SortOrder
@@ -949,17 +1177,27 @@ export type LeadMaxOrderByAggregateInput = {
   readingScore?: Prisma.SortOrder
   speakingScore?: Prisma.SortOrder
   gapsIfAny?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  nextFollowup?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  leadNumber?: Prisma.SortOrder
+  counsellingDate?: Prisma.SortOrder
   studentName?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   emailId?: Prisma.SortOrder
   place?: Prisma.SortOrder
   passport?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  branchId?: Prisma.SortOrder
+  assignedCounselorId?: Prisma.SortOrder
+  isConverted?: Prisma.SortOrder
+  convertedAt?: Prisma.SortOrder
   tenthPercentage?: Prisma.SortOrder
   tenthYearOfPassing?: Prisma.SortOrder
   twelfthPercentage?: Prisma.SortOrder
@@ -983,6 +1221,9 @@ export type LeadMinOrderByAggregateInput = {
   readingScore?: Prisma.SortOrder
   speakingScore?: Prisma.SortOrder
   gapsIfAny?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  nextFollowup?: Prisma.SortOrder
+  remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1005,8 +1246,63 @@ export type LeadSumOrderByAggregateInput = {
   speakingScore?: Prisma.SortOrder
 }
 
+export type LeadScalarRelationFilter = {
+  is?: Prisma.LeadWhereInput
+  isNot?: Prisma.LeadWhereInput
+}
+
+export type LeadCreateNestedManyWithoutAssignedCounselorInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput> | Prisma.LeadCreateWithoutAssignedCounselorInput[] | Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput | Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput[]
+  createMany?: Prisma.LeadCreateManyAssignedCounselorInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUncheckedCreateNestedManyWithoutAssignedCounselorInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput> | Prisma.LeadCreateWithoutAssignedCounselorInput[] | Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput | Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput[]
+  createMany?: Prisma.LeadCreateManyAssignedCounselorInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUpdateManyWithoutAssignedCounselorNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput> | Prisma.LeadCreateWithoutAssignedCounselorInput[] | Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput | Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutAssignedCounselorInput | Prisma.LeadUpsertWithWhereUniqueWithoutAssignedCounselorInput[]
+  createMany?: Prisma.LeadCreateManyAssignedCounselorInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutAssignedCounselorInput | Prisma.LeadUpdateWithWhereUniqueWithoutAssignedCounselorInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutAssignedCounselorInput | Prisma.LeadUpdateManyWithWhereWithoutAssignedCounselorInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadUncheckedUpdateManyWithoutAssignedCounselorNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput> | Prisma.LeadCreateWithoutAssignedCounselorInput[] | Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput | Prisma.LeadCreateOrConnectWithoutAssignedCounselorInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutAssignedCounselorInput | Prisma.LeadUpsertWithWhereUniqueWithoutAssignedCounselorInput[]
+  createMany?: Prisma.LeadCreateManyAssignedCounselorInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutAssignedCounselorInput | Prisma.LeadUpdateWithWhereUniqueWithoutAssignedCounselorInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutAssignedCounselorInput | Prisma.LeadUpdateManyWithWhereWithoutAssignedCounselorInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type NullableFloatFieldUpdateOperationsInput = {
@@ -1025,15 +1321,897 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumLeadStatusFieldUpdateOperationsInput = {
+  set?: $Enums.LeadStatus
+}
+
+export type LeadCreateNestedOneWithoutStudentInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutStudentInput, Prisma.LeadUncheckedCreateWithoutStudentInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutStudentInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutStudentNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutStudentInput, Prisma.LeadUncheckedCreateWithoutStudentInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutStudentInput
+  upsert?: Prisma.LeadUpsertWithoutStudentInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutStudentInput, Prisma.LeadUpdateWithoutStudentInput>, Prisma.LeadUncheckedUpdateWithoutStudentInput>
+}
+
+export type LeadCreateNestedManyWithoutBranchInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput> | Prisma.LeadCreateWithoutBranchInput[] | Prisma.LeadUncheckedCreateWithoutBranchInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutBranchInput | Prisma.LeadCreateOrConnectWithoutBranchInput[]
+  createMany?: Prisma.LeadCreateManyBranchInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUncheckedCreateNestedManyWithoutBranchInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput> | Prisma.LeadCreateWithoutBranchInput[] | Prisma.LeadUncheckedCreateWithoutBranchInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutBranchInput | Prisma.LeadCreateOrConnectWithoutBranchInput[]
+  createMany?: Prisma.LeadCreateManyBranchInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUpdateManyWithoutBranchNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput> | Prisma.LeadCreateWithoutBranchInput[] | Prisma.LeadUncheckedCreateWithoutBranchInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutBranchInput | Prisma.LeadCreateOrConnectWithoutBranchInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutBranchInput | Prisma.LeadUpsertWithWhereUniqueWithoutBranchInput[]
+  createMany?: Prisma.LeadCreateManyBranchInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutBranchInput | Prisma.LeadUpdateWithWhereUniqueWithoutBranchInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutBranchInput | Prisma.LeadUpdateManyWithWhereWithoutBranchInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadUncheckedUpdateManyWithoutBranchNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput> | Prisma.LeadCreateWithoutBranchInput[] | Prisma.LeadUncheckedCreateWithoutBranchInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutBranchInput | Prisma.LeadCreateOrConnectWithoutBranchInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutBranchInput | Prisma.LeadUpsertWithWhereUniqueWithoutBranchInput[]
+  createMany?: Prisma.LeadCreateManyBranchInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutBranchInput | Prisma.LeadUpdateWithWhereUniqueWithoutBranchInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutBranchInput | Prisma.LeadUpdateManyWithWhereWithoutBranchInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadCreateWithoutAssignedCounselorInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  branch: Prisma.BranchCreateNestedOneWithoutLeadsInput
+  student?: Prisma.StudentCreateNestedOneWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutAssignedCounselorInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  branchId: string
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  student?: Prisma.StudentUncheckedCreateNestedOneWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutAssignedCounselorInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput>
+}
+
+export type LeadCreateManyAssignedCounselorInputEnvelope = {
+  data: Prisma.LeadCreateManyAssignedCounselorInput | Prisma.LeadCreateManyAssignedCounselorInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadUpsertWithWhereUniqueWithoutAssignedCounselorInput = {
+  where: Prisma.LeadWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutAssignedCounselorInput, Prisma.LeadUncheckedUpdateWithoutAssignedCounselorInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutAssignedCounselorInput, Prisma.LeadUncheckedCreateWithoutAssignedCounselorInput>
+}
+
+export type LeadUpdateWithWhereUniqueWithoutAssignedCounselorInput = {
+  where: Prisma.LeadWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutAssignedCounselorInput, Prisma.LeadUncheckedUpdateWithoutAssignedCounselorInput>
+}
+
+export type LeadUpdateManyWithWhereWithoutAssignedCounselorInput = {
+  where: Prisma.LeadScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutAssignedCounselorInput>
+}
+
+export type LeadScalarWhereInput = {
+  AND?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+  OR?: Prisma.LeadScalarWhereInput[]
+  NOT?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+  id?: Prisma.StringFilter<"Lead"> | string
+  leadNumber?: Prisma.StringFilter<"Lead"> | string
+  counsellingDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  studentName?: Prisma.StringNullableFilter<"Lead"> | string | null
+  mobileNumber?: Prisma.StringNullableFilter<"Lead"> | string | null
+  emailId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  place?: Prisma.StringNullableFilter<"Lead"> | string | null
+  passport?: Prisma.StringNullableFilter<"Lead"> | string | null
+  source?: Prisma.StringNullableFilter<"Lead"> | string | null
+  branchId?: Prisma.StringFilter<"Lead"> | string
+  assignedCounselorId?: Prisma.StringNullableFilter<"Lead"> | string | null
+  isConverted?: Prisma.BoolFilter<"Lead"> | boolean
+  convertedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  tenthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  tenthYearOfPassing?: Prisma.IntNullableFilter<"Lead"> | number | null
+  twelfthPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  twelfthYearOfPassing?: Prisma.IntNullableFilter<"Lead"> | number | null
+  bachelorsCourse?: Prisma.StringNullableFilter<"Lead"> | string | null
+  bachelorsUniversityName?: Prisma.StringNullableFilter<"Lead"> | string | null
+  bachelorsPercentage?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  bachelorsYearOfPassing?: Prisma.IntNullableFilter<"Lead"> | number | null
+  backlogs?: Prisma.IntNullableFilter<"Lead"> | number | null
+  workExperience?: Prisma.StringNullableFilter<"Lead"> | string | null
+  preferredCountry?: Prisma.StringNullableFilter<"Lead"> | string | null
+  preferredIntake?: Prisma.StringNullableFilter<"Lead"> | string | null
+  preferredCourse?: Prisma.StringNullableFilter<"Lead"> | string | null
+  greGmatScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  quantitativeScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  verbalScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  analyticalWritingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  englishTestType?: Prisma.StringNullableFilter<"Lead"> | string | null
+  listeningScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  writingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  readingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  speakingScore?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  gapsIfAny?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  nextFollowup?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  remarks?: Prisma.StringNullableFilter<"Lead"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+}
+
+export type LeadCreateWithoutStudentInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  branch: Prisma.BranchCreateNestedOneWithoutLeadsInput
+  assignedCounselor?: Prisma.UserCreateNestedOneWithoutAssignedLeadsInput
+}
+
+export type LeadUncheckedCreateWithoutStudentInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  branchId: string
+  assignedCounselorId?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LeadCreateOrConnectWithoutStudentInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutStudentInput, Prisma.LeadUncheckedCreateWithoutStudentInput>
+}
+
+export type LeadUpsertWithoutStudentInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutStudentInput, Prisma.LeadUncheckedUpdateWithoutStudentInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutStudentInput, Prisma.LeadUncheckedCreateWithoutStudentInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutStudentInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutStudentInput, Prisma.LeadUncheckedUpdateWithoutStudentInput>
+}
+
+export type LeadUpdateWithoutStudentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branch?: Prisma.BranchUpdateOneRequiredWithoutLeadsNestedInput
+  assignedCounselor?: Prisma.UserUpdateOneWithoutAssignedLeadsNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutStudentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedCounselorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadCreateWithoutBranchInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedCounselor?: Prisma.UserCreateNestedOneWithoutAssignedLeadsInput
+  student?: Prisma.StudentCreateNestedOneWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutBranchInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  assignedCounselorId?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  student?: Prisma.StudentUncheckedCreateNestedOneWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutBranchInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput>
+}
+
+export type LeadCreateManyBranchInputEnvelope = {
+  data: Prisma.LeadCreateManyBranchInput | Prisma.LeadCreateManyBranchInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadUpsertWithWhereUniqueWithoutBranchInput = {
+  where: Prisma.LeadWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutBranchInput, Prisma.LeadUncheckedUpdateWithoutBranchInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutBranchInput, Prisma.LeadUncheckedCreateWithoutBranchInput>
+}
+
+export type LeadUpdateWithWhereUniqueWithoutBranchInput = {
+  where: Prisma.LeadWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutBranchInput, Prisma.LeadUncheckedUpdateWithoutBranchInput>
+}
+
+export type LeadUpdateManyWithWhereWithoutBranchInput = {
+  where: Prisma.LeadScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutBranchInput>
+}
+
+export type LeadCreateManyAssignedCounselorInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  branchId: string
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LeadUpdateWithoutAssignedCounselorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branch?: Prisma.BranchUpdateOneRequiredWithoutLeadsNestedInput
+  student?: Prisma.StudentUpdateOneWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutAssignedCounselorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  student?: Prisma.StudentUncheckedUpdateOneWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateManyWithoutAssignedCounselorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadCreateManyBranchInput = {
+  id?: string
+  leadNumber: string
+  counsellingDate?: Date | string | null
+  studentName?: string | null
+  mobileNumber?: string | null
+  emailId?: string | null
+  place?: string | null
+  passport?: string | null
+  source?: string | null
+  assignedCounselorId?: string | null
+  isConverted?: boolean
+  convertedAt?: Date | string | null
+  tenthPercentage?: number | null
+  tenthYearOfPassing?: number | null
+  twelfthPercentage?: number | null
+  twelfthYearOfPassing?: number | null
+  bachelorsCourse?: string | null
+  bachelorsUniversityName?: string | null
+  bachelorsPercentage?: number | null
+  bachelorsYearOfPassing?: number | null
+  backlogs?: number | null
+  workExperience?: string | null
+  preferredCountry?: string | null
+  preferredIntake?: string | null
+  preferredCourse?: string | null
+  greGmatScore?: number | null
+  quantitativeScore?: number | null
+  verbalScore?: number | null
+  analyticalWritingScore?: number | null
+  englishTestType?: string | null
+  listeningScore?: number | null
+  writingScore?: number | null
+  readingScore?: number | null
+  speakingScore?: number | null
+  gapsIfAny?: string | null
+  status?: $Enums.LeadStatus
+  nextFollowup?: Date | string | null
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LeadUpdateWithoutBranchInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedCounselor?: Prisma.UserUpdateOneWithoutAssignedLeadsNestedInput
+  student?: Prisma.StudentUpdateOneWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutBranchInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedCounselorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  student?: Prisma.StudentUncheckedUpdateOneWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateManyWithoutBranchInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  leadNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  counsellingDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  place?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passport?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedCounselorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isConverted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tenthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  twelfthPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  twelfthYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bachelorsCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsUniversityName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bachelorsPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bachelorsYearOfPassing?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  backlogs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCountry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredIntake?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCourse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  greGmatScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  quantitativeScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  verbalScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  analyticalWritingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  englishTestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  listeningScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  writingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  readingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  speakingScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gapsIfAny?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  nextFollowup?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  leadNumber?: boolean
+  counsellingDate?: boolean
   studentName?: boolean
   mobileNumber?: boolean
   emailId?: boolean
   place?: boolean
   passport?: boolean
+  source?: boolean
+  branchId?: boolean
+  assignedCounselorId?: boolean
+  isConverted?: boolean
+  convertedAt?: boolean
   tenthPercentage?: boolean
   tenthYearOfPassing?: boolean
   twelfthPercentage?: boolean
@@ -1057,17 +2235,30 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   readingScore?: boolean
   speakingScore?: boolean
   gapsIfAny?: boolean
+  status?: boolean
+  nextFollowup?: boolean
+  remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
+  student?: boolean | Prisma.Lead$studentArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  leadNumber?: boolean
+  counsellingDate?: boolean
   studentName?: boolean
   mobileNumber?: boolean
   emailId?: boolean
   place?: boolean
   passport?: boolean
+  source?: boolean
+  branchId?: boolean
+  assignedCounselorId?: boolean
+  isConverted?: boolean
+  convertedAt?: boolean
   tenthPercentage?: boolean
   tenthYearOfPassing?: boolean
   twelfthPercentage?: boolean
@@ -1091,17 +2282,29 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   readingScore?: boolean
   speakingScore?: boolean
   gapsIfAny?: boolean
+  status?: boolean
+  nextFollowup?: boolean
+  remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  leadNumber?: boolean
+  counsellingDate?: boolean
   studentName?: boolean
   mobileNumber?: boolean
   emailId?: boolean
   place?: boolean
   passport?: boolean
+  source?: boolean
+  branchId?: boolean
+  assignedCounselorId?: boolean
+  isConverted?: boolean
+  convertedAt?: boolean
   tenthPercentage?: boolean
   tenthYearOfPassing?: boolean
   twelfthPercentage?: boolean
@@ -1125,17 +2328,29 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   readingScore?: boolean
   speakingScore?: boolean
   gapsIfAny?: boolean
+  status?: boolean
+  nextFollowup?: boolean
+  remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectScalar = {
   id?: boolean
+  leadNumber?: boolean
+  counsellingDate?: boolean
   studentName?: boolean
   mobileNumber?: boolean
   emailId?: boolean
   place?: boolean
   passport?: boolean
+  source?: boolean
+  branchId?: boolean
+  assignedCounselorId?: boolean
+  isConverted?: boolean
+  convertedAt?: boolean
   tenthPercentage?: boolean
   tenthYearOfPassing?: boolean
   twelfthPercentage?: boolean
@@ -1159,22 +2374,49 @@ export type LeadSelectScalar = {
   readingScore?: boolean
   speakingScore?: boolean
   gapsIfAny?: boolean
+  status?: boolean
+  nextFollowup?: boolean
+  remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentName" | "mobileNumber" | "emailId" | "place" | "passport" | "tenthPercentage" | "tenthYearOfPassing" | "twelfthPercentage" | "twelfthYearOfPassing" | "bachelorsCourse" | "bachelorsUniversityName" | "bachelorsPercentage" | "bachelorsYearOfPassing" | "backlogs" | "workExperience" | "preferredCountry" | "preferredIntake" | "preferredCourse" | "greGmatScore" | "quantitativeScore" | "verbalScore" | "analyticalWritingScore" | "englishTestType" | "listeningScore" | "writingScore" | "readingScore" | "speakingScore" | "gapsIfAny" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadNumber" | "counsellingDate" | "studentName" | "mobileNumber" | "emailId" | "place" | "passport" | "source" | "branchId" | "assignedCounselorId" | "isConverted" | "convertedAt" | "tenthPercentage" | "tenthYearOfPassing" | "twelfthPercentage" | "twelfthYearOfPassing" | "bachelorsCourse" | "bachelorsUniversityName" | "bachelorsPercentage" | "bachelorsYearOfPassing" | "backlogs" | "workExperience" | "preferredCountry" | "preferredIntake" | "preferredCourse" | "greGmatScore" | "quantitativeScore" | "verbalScore" | "analyticalWritingScore" | "englishTestType" | "listeningScore" | "writingScore" | "readingScore" | "speakingScore" | "gapsIfAny" | "status" | "nextFollowup" | "remarks" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
+export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
+  student?: boolean | Prisma.Lead$studentArgs<ExtArgs>
+}
+export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
+}
+export type LeadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  assignedCounselor?: boolean | Prisma.Lead$assignedCounselorArgs<ExtArgs>
+}
 
 export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Lead"
-  objects: {}
+  objects: {
+    branch: Prisma.$BranchPayload<ExtArgs>
+    assignedCounselor: Prisma.$UserPayload<ExtArgs> | null
+    student: Prisma.$StudentPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    leadNumber: string
+    counsellingDate: Date | null
     studentName: string | null
     mobileNumber: string | null
     emailId: string | null
     place: string | null
     passport: string | null
+    source: string | null
+    branchId: string
+    assignedCounselorId: string | null
+    isConverted: boolean
+    convertedAt: Date | null
     tenthPercentage: number | null
     tenthYearOfPassing: number | null
     twelfthPercentage: number | null
@@ -1198,6 +2440,9 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     readingScore: number | null
     speakingScore: number | null
     gapsIfAny: string | null
+    status: $Enums.LeadStatus
+    nextFollowup: Date | null
+    remarks: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["lead"]>
@@ -1594,6 +2839,9 @@ readonly fields: LeadFieldRefs;
  */
 export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  branch<T extends Prisma.BranchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BranchDefaultArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  assignedCounselor<T extends Prisma.Lead$assignedCounselorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$assignedCounselorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  student<T extends Prisma.Lead$studentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$studentArgs<ExtArgs>>): Prisma.Prisma__StudentClient<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1624,11 +2872,18 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface LeadFieldRefs {
   readonly id: Prisma.FieldRef<"Lead", 'String'>
+  readonly leadNumber: Prisma.FieldRef<"Lead", 'String'>
+  readonly counsellingDate: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly studentName: Prisma.FieldRef<"Lead", 'String'>
   readonly mobileNumber: Prisma.FieldRef<"Lead", 'String'>
   readonly emailId: Prisma.FieldRef<"Lead", 'String'>
   readonly place: Prisma.FieldRef<"Lead", 'String'>
   readonly passport: Prisma.FieldRef<"Lead", 'String'>
+  readonly source: Prisma.FieldRef<"Lead", 'String'>
+  readonly branchId: Prisma.FieldRef<"Lead", 'String'>
+  readonly assignedCounselorId: Prisma.FieldRef<"Lead", 'String'>
+  readonly isConverted: Prisma.FieldRef<"Lead", 'Boolean'>
+  readonly convertedAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly tenthPercentage: Prisma.FieldRef<"Lead", 'Float'>
   readonly tenthYearOfPassing: Prisma.FieldRef<"Lead", 'Int'>
   readonly twelfthPercentage: Prisma.FieldRef<"Lead", 'Float'>
@@ -1652,6 +2907,9 @@ export interface LeadFieldRefs {
   readonly readingScore: Prisma.FieldRef<"Lead", 'Float'>
   readonly speakingScore: Prisma.FieldRef<"Lead", 'Float'>
   readonly gapsIfAny: Prisma.FieldRef<"Lead", 'String'>
+  readonly status: Prisma.FieldRef<"Lead", 'LeadStatus'>
+  readonly nextFollowup: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly remarks: Prisma.FieldRef<"Lead", 'String'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Lead", 'DateTime'>
 }
@@ -1671,6 +2929,10 @@ export type LeadFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter, which Lead to fetch.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -1689,6 +2951,10 @@ export type LeadFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter, which Lead to fetch.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -1706,6 +2972,10 @@ export type LeadFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * Filter, which Lead to fetch.
    */
@@ -1755,6 +3025,10 @@ export type LeadFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter, which Lead to fetch.
    */
   where?: Prisma.LeadWhereInput
@@ -1802,6 +3076,10 @@ export type LeadFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * Filter, which Leads to fetch.
    */
@@ -1851,6 +3129,10 @@ export type LeadCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * The data needed to create a Lead.
    */
   data: Prisma.XOR<Prisma.LeadCreateInput, Prisma.LeadUncheckedCreateInput>
@@ -1884,6 +3166,10 @@ export type LeadCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.LeadCreateManyInput | Prisma.LeadCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1898,6 +3184,10 @@ export type LeadUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * The data needed to update a Lead.
    */
@@ -1950,6 +3240,10 @@ export type LeadUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Leads to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1964,6 +3258,10 @@ export type LeadUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * The filter to search for the Lead to update in case it exists.
    */
@@ -1991,6 +3289,10 @@ export type LeadDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter which Lead to delete.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -2011,6 +3313,44 @@ export type LeadDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Lead.assignedCounselor
+ */
+export type Lead$assignedCounselorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Lead.student
+ */
+export type Lead$studentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Student
+   */
+  select?: Prisma.StudentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Student
+   */
+  omit?: Prisma.StudentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StudentInclude<ExtArgs> | null
+  where?: Prisma.StudentWhereInput
+}
+
+/**
  * Lead without action
  */
 export type LeadDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2022,4 +3362,8 @@ export type LeadDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
 }

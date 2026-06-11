@@ -17,12 +17,43 @@ enum UserRole {
   counselor
 }
 
+enum LeadStatus {
+  draft
+  new
+  contacted
+  qualified
+  converted
+  lost
+}
+
+enum StudentStatus {
+  active
+  visa_process
+  loan_process
+  admitted
+  enrolled
+  completed
+  dropped
+}
+
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      UserRole @default(counselor)
+  id String @id @default(uuid())
+
+  name     String
+  email    String @unique
+  password String
+
+  role UserRole @default(counselor)
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
+
+  assignedLeads Lead[] @relation("CounselorLeads")
+
+  students Student[] @relation("CounselorStudents")
+
+  timeline StudentTimeline[] @relation("TimelineCreatedBy")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,11 +61,29 @@ model User {
 model Lead {
   id String @id @default(uuid())
 
+  leadNumber String @unique
+
+  counsellingDate DateTime?
+
   studentName  String?
   mobileNumber String?
   emailId      String?
-  place        String?
-  passport     String?
+
+  place    String?
+  passport String?
+
+  source String?
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
+
+  assignedCounselorId String?
+
+  assignedCounselor User? @relation("CounselorLeads", fields: [assignedCounselorId], references: [id])
+
+  isConverted Boolean @default(false)
+
+  convertedAt DateTime?
 
   tenthPercentage    Float?
   tenthYearOfPassing Int?
@@ -61,14 +110,119 @@ model Lead {
   verbalScore            Float?
   analyticalWritingScore Float?
 
-  englishTestType String? // IELTS / TOEFL / DUOLINGO
-  listeningScore  Float?
-  writingScore    Float?
-  readingScore    Float?
-  speakingScore   Float?
+  englishTestType String?
+
+  listeningScore Float?
+  writingScore   Float?
+  readingScore   Float?
+  speakingScore  Float?
 
   gapsIfAny String?
 
+  status LeadStatus @default(new)
+
+  nextFollowup DateTime?
+  remarks      String?
+
+  student Student?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([branchId])
+  @@index([assignedCounselorId])
+  @@index([branchId, status])
+  @@index([branchId, isConverted])
+}
+
+model Student {
+  id String @id @default(uuid())
+
+  studentNumber String @unique
+
+  leadId String @unique
+  lead   Lead   @relation(fields: [leadId], references: [id])
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
+
+  counselorId String?
+
+  counselor User? @relation("CounselorStudents", fields: [counselorId], references: [id])
+
+  timeline StudentTimeline[]
+
+  studentName  String
+  mobileNumber String?
+  emailId      String?
+
+  preferredCountry String?
+  preferredCourse  String?
+  status           StudentStatus @default(active)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([branchId])
+  @@index([counselorId])
+}
+
+model Branch {
+  id String @id @default(uuid())
+
+  name String @unique
+
+  users    User[]
+  leads    Lead[]
+  students Student[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TimelineType {
+  note
+  followup
+  call
+  meeting
+
+  status_change
+
+  document
+  application
+  offer_letter
+
+  loan
+  visa
+
+  payment
+
+  system
+}
+
+model StudentTimeline {
+  id String @id @default(uuid())
+
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+
+  type TimelineType
+
+  title String
+
+  description String? @db.Text
+
+  followupDate DateTime?
+
+  oldValue String?
+  newValue String?
+
+  createdById String?
+
+  createdBy User? @relation("TimelineCreatedBy", fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([studentId])
+  @@index([studentId, createdAt])
 }
