@@ -12,10 +12,96 @@ datasource db {
   provider = "postgresql"
 }
 
-enum UserRole {
-  super_admin
-  admin
-  counselor
+model User {
+  id String @id @default(uuid())
+
+  name     String
+  email    String @unique
+  password String
+
+  branchId String?
+
+  branch Branch? @relation(fields: [branchId], references: [id])
+
+  assignedLeads Lead[] @relation("CounselorLeads")
+
+  students Student[] @relation("CounselorStudents")
+
+  timeline StudentTimeline[] @relation("TimelineCreatedBy")
+
+  userRoles UserRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id String @id @default(uuid())
+
+  name String @unique
+
+  description String?
+
+  isSystem Boolean @default(false)
+
+  userRoles UserRole[]
+
+  modulePermissions RoleModulePermission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Module {
+  id String @id @default(uuid())
+
+  name String
+
+  code String @unique
+
+  icon String?
+
+  sortOrder Int @default(0)
+
+  isActive Boolean @default(true)
+
+  modulePermissions RoleModulePermission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoleModulePermission {
+  roleId String
+
+  moduleId String
+
+  canCreate Boolean @default(false)
+
+  canRead Boolean @default(false)
+
+  canUpdate Boolean @default(false)
+
+  canDelete Boolean @default(false)
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, moduleId])
+}
+
+model UserRole {
+  userId String
+  roleId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  assignedAt DateTime @default(now())
+
+  @@id([userId, roleId])
 }
 
 enum LeadStatus {
@@ -37,34 +123,17 @@ enum StudentStatus {
   dropped
 }
 
-model User {
-  id String @id @default(uuid())
 
-  name     String
-  email    String @unique
-  password String
-
-  role UserRole
-
-  branchId String?
-
-  branch Branch? @relation(fields: [branchId], references: [id])
-
-  assignedLeads Lead[] @relation("CounselorLeads")
-
-  students Student[] @relation("CounselorStudents")
-
-  timeline StudentTimeline[] @relation("TimelineCreatedBy")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum LeadType {
+  study_abroad
+  mbbs
 }
 
 model Lead {
   id String @id @default(uuid())
 
   leadNumber String @unique
-
+  leadType LeadType @default(study_abroad)
   counsellingDate DateTime?
 
   studentName  String?
@@ -131,7 +200,7 @@ model Lead {
   remarks      String?
 
   student Student?
-
+  mbbsDetails MbbsLeadDetails?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -140,7 +209,34 @@ model Lead {
   @@index([branchId, status])
   @@index([branchId, isConverted])
 }
+model MbbsLeadDetails {
+  id String @id @default(uuid())
 
+  leadId String @unique
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  address String?
+
+  state String?
+  city String?
+
+  twelfthCollegeName String?
+  twelfthMarks Float?
+
+  neetMarks Float?
+
+  ept String?
+
+  listeningScore Float?
+  readingScore Float?
+  writingScore Float?
+  speakingScore Float?
+
+  preferredUniversity String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model Student {
   id String @id @default(uuid())
 
