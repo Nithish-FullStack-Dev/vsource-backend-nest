@@ -4,6 +4,8 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
+import { Patch } from '@nestjs/common';
+import { UpdateLeadDto } from './dto/update-lead.dto';
 
 @Controller('leads')
 export class LeadsController {
@@ -27,5 +29,9 @@ export class LeadsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.leadsService.delete(id);
+  }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() dto: UpdateLeadDto) {
+    return this.leadsService.update(id, dto);
   }
 }
