@@ -14,6 +14,8 @@ import { IntakesService } from './intakes/intakes.service';
 import { IntakesModule } from './intakes/intakes.module';
 import { LeadSourcesController } from './lead-sources/lead-sources.controller';
 import { LeadSourcesModule } from './lead-sources/lead-sources.module';
+import { LeadDegreesModule } from './lead-degrees/lead-degrees.module';
+import { LeadUniversitiesModule } from './lead-universities/lead-universities.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { LeadSourcesModule } from './lead-sources/lead-sources.module';
     CountriesModule,
     IntakesModule,
     LeadSourcesModule,
+    LeadDegreesModule,
+    LeadUniversitiesModule,
   ],
   controllers: [AppController],
 
