@@ -45,13 +45,11 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const accessToken = jwt.sign(
-      { sub: user.id, role: user.role },
-      JWT_SECRET,
-      {
-        expiresIn: TOKEN_EXPIRES_IN,
-      },
-    );
+    const roles = user.userRoles.map((ur) => ur.role.name);
+
+    const accessToken = jwt.sign({ sub: user.id, roles }, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRES_IN,
+    });
 
     return {
       accessToken,
@@ -59,32 +57,32 @@ export class AuthService {
         id: user.id,
         name: user.name,
         email: user.email,
-        role: user.role,
+        roles,
       },
     };
   }
 
-  async register(dto: RegisterDto) {
-    const email = dto.email.toLowerCase().trim();
-    const existing = await this.usersService.findByEmail(email);
-    if (existing) {
-      throw new BadRequestException('User already exists');
-    }
+  // async register(dto: RegisterDto) {
+  //   const email = dto.email.toLowerCase().trim();
+  //   const existing = await this.usersService.findByEmail(email);
+  //   if (existing) {
+  //     throw new BadRequestException('User already exists');
+  //   }
 
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user = await this.usersService.createUser({
-      name: dto.name,
-      email: dto.email,
-      password: hashedPassword,
-      role: dto.role,
-      branchId: dto.branchId,
-    });
+  //   const hashedPassword = await bcrypt.hash(dto.password, 10);
+  //   const user = await this.usersService.createUser({
+  //     name: dto.name,
+  //     email: dto.email,
+  //     password: hashedPassword,
+  //     role: dto.role,
+  //     branchId: dto.branchId,
+  //   });
 
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    };
-  }
+  //   return {
+  //     id: user.id,
+  //     name: user.name,
+  //     email: user.email,
+  //     role: user.role,
+  //   };
+  // }
 }

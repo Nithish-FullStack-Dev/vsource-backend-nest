@@ -18,8 +18,8 @@ export class AuthController {
     return this.authService.login(credentials);
   }
 
-  @Post('register')
-  register(@Body() data: RegisterDto) {
-    return this.authService.register(data);
-  }
+  // @Post('register')
+  // register(@Body() data: RegisterDto) {
+  //   return this.authService.register(data);
+  // }
 }

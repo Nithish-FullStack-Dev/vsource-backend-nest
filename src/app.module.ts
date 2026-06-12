@@ -16,6 +16,8 @@ import { LeadSourcesController } from './lead-sources/lead-sources.controller';
 import { LeadSourcesModule } from './lead-sources/lead-sources.module';
 import { LeadDegreesModule } from './lead-degrees/lead-degrees.module';
 import { LeadUniversitiesModule } from './lead-universities/lead-universities.module';
+import { ModulesModule } from './modules/modules.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { LeadUniversitiesModule } from './lead-universities/lead-universities.mo
     LeadSourcesModule,
     LeadDegreesModule,
     LeadUniversitiesModule,
+    ModulesModule,
+    RolesModule,
   ],
   controllers: [AppController],
 
