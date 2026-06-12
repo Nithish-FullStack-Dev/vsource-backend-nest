@@ -68,8 +68,19 @@ export class BranchesService {
       id: branch.id,
       name: branch.name,
       code: branch.code,
+
+      email: branch.email,
+      phone: branch.phone,
+
       city: branch.city,
+      state: branch.state,
+
+      country: branch.country,
+      pincode: branch.pincode,
+
       address: branch.address,
+      status: branch.status,
+
       createdAt: branch.createdAt,
 
       usersCount: branch._count.users,
@@ -129,7 +140,16 @@ export class BranchesService {
       data: {
         name: dto.name,
         code: dto.code,
+
+        email: dto.email,
+        phone: dto.phone,
+
         city: dto.city,
+        state: dto.state,
+
+        country: dto.country,
+        pincode: dto.pincode,
+
         address: dto.address,
       },
     });
