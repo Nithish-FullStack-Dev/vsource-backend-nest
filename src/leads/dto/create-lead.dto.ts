@@ -1,5 +1,6 @@
 // src/leads/dto/create-lead.dto.ts
 
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsInt,
@@ -7,6 +8,7 @@ import {
   IsOptional,
   IsString,
   IsEnum,
+  IsDateString,
 } from 'class-validator';
 import { LeadStatus } from 'src/generated/prisma/enums';
 
@@ -18,6 +20,10 @@ export class CreateLeadDto {
   @IsOptional()
   @IsString()
   studentName?: string;
+
+  @IsOptional()
+  @IsString()
+  fatherName?: string;
 
   @IsOptional()
   @IsString()
@@ -34,6 +40,11 @@ export class CreateLeadDto {
   @IsOptional()
   @IsString()
   passport?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsDateString()
+  passportExpireDate?: string;
 
   @IsOptional()
   @IsNumber()

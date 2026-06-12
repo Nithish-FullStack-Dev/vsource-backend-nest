@@ -4,4 +4,8 @@ import { IsString } from 'class-validator';
 export class CreateUniversityDto {
   @IsString()
   name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
 }

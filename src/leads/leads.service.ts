@@ -33,11 +33,16 @@ export class LeadsService {
         leadNumber,
 
         studentName: dto.studentName,
+        fatherName: dto.fatherName,
         mobileNumber: dto.mobileNumber,
         emailId: dto.emailId,
 
         place: dto.place,
         passport: dto.passport,
+
+        passportExpireDate: dto.passportExpireDate
+          ? new Date(dto.passportExpireDate)
+          : null,
 
         source: dto.source,
 
@@ -143,11 +148,19 @@ export class LeadsService {
           : undefined,
 
         studentName: dto.studentName,
+        fatherName: dto.fatherName,
         mobileNumber: dto.mobileNumber,
         emailId: dto.emailId,
 
         place: dto.place,
         passport: dto.passport,
+
+        passportExpireDate:
+          dto.passportExpireDate !== undefined
+            ? dto.passportExpireDate
+              ? new Date(dto.passportExpireDate)
+              : null
+            : undefined,
 
         source: dto.source,
 
