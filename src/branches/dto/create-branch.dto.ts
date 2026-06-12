@@ -11,16 +11,29 @@ export class CreateBranchDto {
 
   @IsOptional()
   @IsString()
+  email?: string;
+
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
+  @IsOptional()
+  @IsString()
   city?: string;
 
   @IsOptional()
   @IsString()
-  address?: string;
+  state?: string;
 
-  constructor(name: string, code: string, city?: string, address?: string) {
-    this.name = name;
-    this.code = code;
-    this.city = city;
-    this.address = address;
-  }
+  @IsOptional()
+  @IsString()
+  country?: string;
+
+  @IsOptional()
+  @IsString()
+  pincode?: string;
+
+  @IsOptional()
+  @IsString()
+  address?: string;
 }
