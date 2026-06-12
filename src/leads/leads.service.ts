@@ -3,7 +3,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
-
+import { UpdateLeadDto } from './dto/update-lead.dto';
 @Injectable()
 export class LeadsService {
   constructor(private readonly prisma: PrismaService) {}
@@ -103,6 +103,10 @@ export class LeadsService {
   }
   async findAll() {
     return this.prisma.lead.findMany({
+      include: {
+        branch: true,
+        assignedCounselor: true,
+      },
       orderBy: {
         createdAt: 'desc',
       },
@@ -114,6 +118,10 @@ export class LeadsService {
       where: {
         id,
       },
+      include: {
+        branch: true,
+        assignedCounselor: true,
+      },
     });
   }
 
@@ -121,6 +129,81 @@ export class LeadsService {
     return this.prisma.lead.delete({
       where: {
         id,
+      },
+    });
+  }
+  async update(id: string, dto: UpdateLeadDto) {
+    return this.prisma.lead.update({
+      where: {
+        id,
+      },
+      data: {
+        counsellingDate: dto.counsellingDate
+          ? new Date(dto.counsellingDate)
+          : undefined,
+
+        studentName: dto.studentName,
+        mobileNumber: dto.mobileNumber,
+        emailId: dto.emailId,
+
+        place: dto.place,
+        passport: dto.passport,
+
+        source: dto.source,
+
+        branchId: dto.branchId,
+
+        assignedCounselorId: dto.assignedCounselorId,
+
+        tenthPercentage: dto.tenthPercentage,
+        tenthYearOfPassing: dto.tenthYearOfPassing,
+
+        twelfthPercentage: dto.twelfthPercentage,
+        twelfthYearOfPassing: dto.twelfthYearOfPassing,
+
+        bachelorsCourse: dto.bachelorsCourse,
+        bachelorsUniversityName: dto.bachelorsUniversityName,
+
+        bachelorsPercentage: dto.bachelorsPercentage,
+        bachelorsYearOfPassing: dto.bachelorsYearOfPassing,
+
+        backlogs: dto.backlogs,
+
+        workExperience: dto.workExperience,
+
+        preferredCountry: dto.preferredCountry,
+        preferredIntake: dto.preferredIntake,
+        preferredCourse: dto.preferredCourse,
+
+        greGmatScore: dto.greGmatScore,
+        quantitativeScore: dto.quantitativeScore,
+        verbalScore: dto.verbalScore,
+        analyticalWritingScore: dto.analyticalWritingScore,
+
+        englishTestType: dto.englishTestType,
+
+        listeningScore: dto.listeningScore,
+        readingScore: dto.readingScore,
+        writingScore: dto.writingScore,
+        speakingScore: dto.speakingScore,
+
+        gapsIfAny: dto.gapsIfAny,
+
+        status: dto.status,
+
+        remarks: dto.remarks,
+
+        nextFollowup:
+          dto.nextFollowup !== undefined
+            ? dto.nextFollowup
+              ? new Date(dto.nextFollowup)
+              : null
+            : undefined,
+      },
+
+      include: {
+        branch: true,
+        assignedCounselor: true,
       },
     });
   }
