@@ -68,11 +68,15 @@ model Lead {
   counsellingDate DateTime?
 
   studentName  String?
+  fatherName   String?
+  
   mobileNumber String?
   emailId      String?
 
   place    String?
   passport String?
+
+  passportExpireDate DateTime?
 
   source String?
 
@@ -172,17 +176,25 @@ model Student {
 model Branch {
   id String @id @default(uuid())
 
-  name    String @unique
-  code    String @unique
+  name String @unique
+  code String @unique
 
-  city    String?
+  email String?
+  phone String?
+
+  city String?
+  state String?
+
+  country String?
+  pincode String?
+
   address String?
 
-  users    User[]
-  leads    Lead[]
-  students Student[]
+  status Boolean @default(true)
 
-  status   Boolean @default(true)
+  users User[]
+  leads Lead[]
+  students Student[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

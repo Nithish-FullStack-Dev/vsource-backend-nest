@@ -37,7 +37,12 @@ export class BranchesService {
       data: {
         name: dto.name,
         code: dto.code,
+        email: dto.email,
+        phone: dto.phone,
         city: dto.city,
+        state: dto.state,
+        country: dto.country,
+        pincode: dto.pincode,
         address: dto.address,
       },
     });
@@ -88,14 +93,44 @@ export class BranchesService {
   }
 
   async update(id: string, dto: UpdateBranchDto) {
-    await this.findOne(id);
+    const branch = await this.findOne(id);
+
+    if (dto.name || dto.code) {
+      const existingBranch = await this.prisma.branch.findFirst({
+        where: {
+          id: {
+            not: id,
+          },
+          OR: [
+            dto.name
+              ? {
+                  name: dto.name,
+                }
+              : undefined,
+
+            dto.code
+              ? {
+                  code: dto.code,
+                }
+              : undefined,
+          ].filter(Boolean) as any,
+        },
+      });
+
+      if (existingBranch) {
+        throw new BadRequestException('Branch name or code already exists');
+      }
+    }
 
     return this.prisma.branch.update({
       where: {
-        id,
+        id: branch.id,
       },
       data: {
-        ...dto,
+        name: dto.name,
+        code: dto.code,
+        city: dto.city,
+        address: dto.address,
       },
     });
   }
