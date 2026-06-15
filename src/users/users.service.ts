@@ -3,6 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUser } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,11 +16,7 @@ export class UsersService {
       },
       include: {
         branch: true,
-        userRoles: {
-          include: {
-            role: true,
-          },
-        },
+        Role: true,
       },
     });
   }
@@ -35,42 +32,140 @@ export class UsersService {
       throw new BadRequestException('Email already exists');
     }
 
-    const roles = await this.prisma.role.findMany({
+    const role = await this.prisma.role.findUnique({
       where: {
-        id: {
-          in: createUser.roleIds,
-        },
+        id: createUser.roleId,
       },
     });
 
-    if (!createUser.roleIds?.length) {
-      throw new BadRequestException('At least one role is required');
+    if (!role) {
+      throw new BadRequestException('Invalid role selected');
     }
 
     const hashedPassword = await bcrypt.hash(createUser.password, 10);
 
-    return this.prisma.$transaction(async (tx) => {
-      const user = await tx.user.create({
-        data: {
-          name: createUser.name,
-          email: createUser.email,
-          password: hashedPassword,
-          branchId: createUser.branchId,
-        },
-      });
-
-      await tx.userRole.createMany({
-        data: createUser.roleIds.map((roleId) => ({
-          userId: user.id,
-          roleId,
-        })),
-      });
-
-      return user;
+    return this.prisma.user.create({
+      data: {
+        name: createUser.name,
+        email: createUser.email,
+        password: hashedPassword,
+        branchId: createUser.branchId,
+        roleId: createUser.roleId,
+      },
+      include: {
+        branch: true,
+        Role: true,
+      },
     });
   }
 
   async getAllUsers() {
-    return await this.prisma.user.findMany();
+    return await this.prisma.user.findMany({
+      include: {
+        branch: true,
+        Role: true,
+      },
+    });
+  }
+
+  async getUserById(id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        branch: true,
+        Role: true,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    return user;
+  }
+
+  async updateUser(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    if (updateUserDto.email && updateUserDto.email !== user.email) {
+      const existingEmail = await this.prisma.user.findUnique({
+        where: {
+          email: updateUserDto.email,
+        },
+      });
+
+      if (existingEmail) {
+        throw new BadRequestException('Email already exists');
+      }
+    }
+
+    // let hashedPassword: string | undefined;
+
+    // if (updateUserDto.password) {
+    //   hashedPassword = await bcrypt.hash(updateUserDto.password, 10);
+    // }
+
+    if (updateUserDto.roleId) {
+      const role = await this.prisma.role.findUnique({
+        where: {
+          id: updateUserDto.roleId,
+        },
+      });
+
+      if (!role) {
+        throw new BadRequestException('Role not found');
+      }
+    }
+
+    return await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        ...(updateUserDto.name && {
+          name: updateUserDto.name,
+        }),
+
+        ...(updateUserDto.email && {
+          email: updateUserDto.email,
+        }),
+
+        ...(updateUserDto.branchId !== undefined && {
+          branchId: updateUserDto.branchId,
+        }),
+
+        ...(updateUserDto.roleId && {
+          roleId: updateUserDto.roleId,
+        }),
+      },
+    });
+  }
+
+  async deleteUser(id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
