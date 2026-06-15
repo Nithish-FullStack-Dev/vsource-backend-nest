@@ -4,7 +4,6 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserRole } from '../generated/prisma/client';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UsersService } from '../users/users.service';
@@ -45,9 +44,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const roles = user.userRoles.map((ur) => ur.role.name);
+    const role = user.role;
 
-    const accessToken = jwt.sign({ sub: user.id, roles }, JWT_SECRET, {
+    const accessToken = jwt.sign({ sub: user.id, role }, JWT_SECRET, {
       expiresIn: TOKEN_EXPIRES_IN,
     });
 
@@ -57,7 +56,7 @@ export class AuthService {
         id: user.id,
         name: user.name,
         email: user.email,
-        roles,
+        role,
       },
     };
   }

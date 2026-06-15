@@ -16,7 +16,7 @@ export class UsersService {
       },
       include: {
         branch: true,
-        Role: true,
+        role: true,
       },
     });
   }
@@ -54,7 +54,7 @@ export class UsersService {
       },
       include: {
         branch: true,
-        Role: true,
+        role: true,
       },
     });
   }
@@ -63,7 +63,7 @@ export class UsersService {
     return await this.prisma.user.findMany({
       include: {
         branch: true,
-        Role: true,
+        role: true,
       },
     });
   }
@@ -75,7 +75,7 @@ export class UsersService {
       },
       include: {
         branch: true,
-        Role: true,
+        role: true,
       },
     });
 
