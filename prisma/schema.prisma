@@ -24,12 +24,17 @@ model User {
   branch Branch? @relation(fields: [branchId], references: [id])
 
   assignedLeads Lead[] @relation("CounselorLeads")
+  assignedMbbsLeads MbbsLead[] @relation("MbbsCounselorLeads")
 
   students Student[] @relation("CounselorStudents")
 
   timeline StudentTimeline[] @relation("TimelineCreatedBy")
 
-  userRoles UserRole[]
+  roleId String
+
+  role Role @relation(fields: [roleId], references: [id])
+
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -44,7 +49,7 @@ model Role {
 
   isSystem Boolean @default(false)
 
-  userRoles UserRole[]
+  users User[]
 
   modulePermissions RoleModulePermission[]
 
@@ -91,18 +96,7 @@ model RoleModulePermission {
   @@id([roleId, moduleId])
 }
 
-model UserRole {
-  userId String
-  roleId String
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
-
-  assignedAt DateTime @default(now())
-
-  @@id([userId, roleId])
-}
 
 enum LeadStatus {
   draft
@@ -112,7 +106,16 @@ enum LeadStatus {
   converted
   lost
 }
+enum MbbsLeadStatus {
+  new
+  contacted
+  qualified
+  admitted
+  enrolled
+  lost
+}
 
+ 
 enum StudentStatus {
   active
   visa_process
@@ -237,6 +240,62 @@ model MbbsLeadDetails {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+model MbbsLead {
+  id String @id @default(uuid())
+
+  leadNumber String @unique
+
+  counsellingDate DateTime?
+
+  studentName String?
+  fatherName String?
+
+  mobileNumber String?
+  emailId String?
+
+  address String?
+
+  state String?
+  city String?
+
+  passport String?
+  passportExpireDate DateTime?
+
+  source String?
+
+  branchId String
+  branch Branch @relation(fields: [branchId], references: [id])
+
+  twelfthCollegeName String?
+  twelfthMarks Float?
+
+  neetMarks Float?
+
+  ept String?
+
+  listeningScore Float?
+  readingScore Float?
+  writingScore Float?
+  speakingScore Float?
+
+  preferredCountry String?
+  preferredIntake String?
+  preferredUniversity String?
+  preferredCourse String?
+
+  remarks String?
+
+  assignedCounselorId String?
+
+  assignedCounselor User?  @relation("MbbsCounselorLeads",fields: [assignedCounselorId],references: [id])
+
+  status MbbsLeadStatus @default(new)
+
+  nextFollowup DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model Student {
   id String @id @default(uuid())
 
@@ -290,6 +349,7 @@ model Branch {
 
   users User[]
   leads Lead[]
+  mbbsLeads MbbsLead[]
   students Student[]
 
   createdAt DateTime @default(now())

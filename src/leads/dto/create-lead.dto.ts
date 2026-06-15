@@ -10,9 +10,13 @@ import {
   IsEnum,
   IsDateString,
 } from 'class-validator';
-import { LeadStatus } from 'src/generated/prisma/enums';
+import { LeadStatus, LeadType } from 'src/generated/prisma/enums';
 
 export class CreateLeadDto {
+  @IsOptional()
+  @IsEnum(LeadType)
+  leadType?: LeadType;
+
   @IsOptional()
   @IsString()
   counsellingDate?: string;
@@ -152,6 +156,38 @@ export class CreateLeadDto {
   @IsOptional()
   @IsString()
   remarks?: string;
+
+  @IsOptional()
+  @IsString()
+  address?: string;
+
+  @IsOptional()
+  @IsString()
+  state?: string;
+
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @IsOptional()
+  @IsString()
+  twelfthCollegeName?: string;
+
+  @IsOptional()
+  @IsNumber()
+  twelfthMarks?: number;
+
+  @IsOptional()
+  @IsNumber()
+  neetMarks?: number;
+
+  @IsOptional()
+  @IsString()
+  ept?: string;
+
+  @IsOptional()
+  @IsString()
+  preferredUniversity?: string;
 
   @IsOptional()
   @IsString()

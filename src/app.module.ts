@@ -18,6 +18,7 @@ import { LeadDegreesModule } from './lead-degrees/lead-degrees.module';
 import { LeadUniversitiesModule } from './lead-universities/lead-universities.module';
 import { ModulesModule } from './modules/modules.module';
 import { RolesModule } from './roles/roles.module';
+import { MbbsLeadsModule } from './mbbs-leads/mbbs-leads.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { RolesModule } from './roles/roles.module';
     LeadUniversitiesModule,
     ModulesModule,
     RolesModule,
+    MbbsLeadsModule,
   ],
   controllers: [AppController],
 
