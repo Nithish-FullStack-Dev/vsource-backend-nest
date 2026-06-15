@@ -1,4 +1,10 @@
-import { IsEmail, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateUser {
   @IsString()
@@ -10,8 +16,12 @@ export class CreateUser {
   @IsString()
   password: string;
 
+  @IsOptional()
+  @IsString()
   branchId?: string;
 
+  @IsArray()
+  @IsUUID('4', { each: true })
   roleIds: string[];
 
   constructor(

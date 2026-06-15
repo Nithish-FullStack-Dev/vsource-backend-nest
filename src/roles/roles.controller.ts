@@ -1,6 +1,6 @@
 // roles.controller.ts
 
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-roles.dto';
@@ -13,6 +13,11 @@ export class RolesController {
   @Post('add')
   create(@Body() dto: CreateRoleDto) {
     return this.rolesService.create(dto);
+  }
+
+  @Get('getAll')
+  getAllRoles() {
+    return this.rolesService.getAllRoles();
   }
 
   @Post(':roleId/permissions')

@@ -28,4 +28,8 @@ export class ModulesService {
       },
     });
   }
+
+  async getAll() {
+    return await this.prisma.module.findMany();
+  }
 }

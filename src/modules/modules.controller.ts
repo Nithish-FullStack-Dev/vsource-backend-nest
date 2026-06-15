@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { CreateModuleDto } from './dto/create-module.dto';
 import { ModulesService } from './modules.service';
@@ -10,5 +10,10 @@ export class ModulesController {
   @Post('add')
   create(@Body() dto: CreateModuleDto) {
     return this.modulesService.create(dto);
+  }
+
+  @Get('/getAll')
+  getAll() {
+    return this.modulesService.getAll();
   }
 }

@@ -67,4 +67,20 @@ export class RolesService {
       };
     });
   }
+
+  async getAllRoles() {
+    return await this.prisma.role.findMany({
+      include: {
+        modulePermissions: {
+          select: {
+            canCreate: true,
+            canDelete: true,
+            canRead: true,
+            canUpdate: true,
+            moduleId: true,
+          },
+        },
+      },
+    });
+  }
 }
