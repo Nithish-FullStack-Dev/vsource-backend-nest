@@ -15,12 +15,11 @@ datasource db {
 model User {
   id String @id @default(uuid())
 
-  name     String
-  email    String @unique
+  name String
+  email String @unique
   password String
 
   branchId String?
-
   branch Branch? @relation(fields: [branchId], references: [id])
 
   assignedLeads Lead[] @relation("CounselorLeads")
@@ -28,13 +27,17 @@ model User {
 
   students Student[] @relation("CounselorStudents")
 
-  timeline StudentTimeline[] @relation("TimelineCreatedBy")
+  studentTimelines StudentTimeline[] @relation("StudentTimelineCreatedBy")
+
+  leadTimelinesCreated LeadTimeline[] @relation("LeadTimelineCreatedBy")
+  leadTimelinesUpdated LeadTimeline[] @relation("LeadTimelineUpdatedBy")
+
+  mbbsTimelinesCreated MbbsLeadTimeline[] @relation("MbbsTimelineCreatedBy")
+  mbbsTimelinesUpdated MbbsLeadTimeline[] @relation("MbbsTimelineUpdatedBy")
+
 
   roleId String
-
   role Role @relation(fields: [roleId], references: [id])
-
-
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -203,42 +206,57 @@ model Lead {
   remarks      String?
 
   student Student?
-  mbbsDetails MbbsLeadDetails?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  timelines LeadTimeline[]
 
   @@index([branchId])
   @@index([assignedCounselorId])
   @@index([branchId, status])
   @@index([branchId, isConverted])
 }
-model MbbsLeadDetails {
+model LeadTimeline {
   id String @id @default(uuid())
 
-  leadId String @unique
-  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId String
 
-  address String?
+  lead Lead @relation(fields: [leadId], references: [id])
 
-  state String?
-  city String?
+  description String
+  nextFollowup DateTime?
 
-  twelfthCollegeName String?
-  twelfthMarks Float?
+  createdById String?
+  updatedById String?
 
-  neetMarks Float?
-
-  ept String?
-
-  listeningScore Float?
-  readingScore Float?
-  writingScore Float?
-  speakingScore Float?
-
-  preferredUniversity String?
+  createdBy User? @relation("LeadTimelineCreatedBy", fields: [createdById], references: [id])
+  updatedBy User? @relation("LeadTimelineUpdatedBy", fields: [updatedById], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([leadId])
+}
+model MbbsLeadTimeline {
+  id String @id @default(uuid())
+
+  mbbsLeadId String
+
+  mbbsLead MbbsLead @relation(fields: [mbbsLeadId], references: [id])
+
+  description String
+  nextFollowup DateTime?
+
+  createdById String?
+  updatedById String?
+
+  createdBy User? @relation("MbbsTimelineCreatedBy", fields: [createdById], references: [id])
+  updatedBy User? @relation("MbbsTimelineUpdatedBy", fields: [updatedById], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mbbsLeadId])
 }
 model MbbsLead {
   id String @id @default(uuid())
@@ -270,6 +288,8 @@ model MbbsLead {
   twelfthMarks Float?
 
   neetMarks Float?
+
+  timelines MbbsLeadTimeline[]
 
   ept String?
 
@@ -395,7 +415,7 @@ model StudentTimeline {
 
   createdById String?
 
-  createdBy User? @relation("TimelineCreatedBy", fields: [createdById], references: [id])
+  createdBy User? @relation("StudentTimelineCreatedBy", fields: [createdById], references: [id])
 
   createdAt DateTime @default(now())
 

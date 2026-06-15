@@ -55,6 +55,7 @@ export class BranchesService {
           select: {
             users: true,
             leads: true,
+            mbbsLeads: true,
             students: true,
           },
         },
@@ -84,7 +85,7 @@ export class BranchesService {
       createdAt: branch.createdAt,
 
       usersCount: branch._count.users,
-      leadsCount: branch._count.leads,
+      leadsCount: branch._count.leads + branch._count.mbbsLeads,
       studentsCount: branch._count.students,
     }));
   }
@@ -165,6 +166,7 @@ export class BranchesService {
           select: {
             users: true,
             leads: true,
+            mbbsLeads: true,
             students: true,
           },
         },
@@ -178,6 +180,7 @@ export class BranchesService {
     if (
       branch._count.users > 0 ||
       branch._count.leads > 0 ||
+      branch._count.mbbsLeads > 0 ||
       branch._count.students > 0
     ) {
       throw new BadRequestException(
