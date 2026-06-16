@@ -1,8 +1,10 @@
 import {
+  ArrayUnique,
   IsArray,
   IsEmail,
   IsOptional,
   IsString,
+  IsUUID,
   MinLength,
 } from 'class-validator';
 
@@ -20,10 +22,12 @@ export class UpdateUserDto {
   //   password?: string;
 
   @IsOptional()
-  @IsString()
-  branchId?: string;
+  @IsArray()
+  @ArrayUnique()
+  @IsUUID('4', { each: true })
+  branchIds?: string[];
 
   @IsOptional()
-  @IsString()
+  @IsUUID()
   roleId?: string;
 }

@@ -88,6 +88,26 @@ export class UsersService {
       throw new BadRequestException('Invalid role selected');
     }
 
+    if (createUser.branchIds?.length) {
+      const uniqueBranchIds = [...new Set(createUser.branchIds)];
+
+      if (uniqueBranchIds.length !== createUser.branchIds.length) {
+        throw new BadRequestException('Duplicate branches are not allowed');
+      }
+
+      const branches = await this.prisma.branch.findMany({
+        where: {
+          id: {
+            in: createUser.branchIds,
+          },
+        },
+      });
+
+      if (branches.length !== createUser.branchIds.length) {
+        throw new BadRequestException('One or more branches are invalid');
+      }
+    }
+
     const hashedPassword = await bcrypt.hash(createUser.password, 10);
 
     return this.prisma.user.create({
@@ -178,6 +198,26 @@ export class UsersService {
       }
     }
 
+    if (updateUserDto.branchIds) {
+      const uniqueBranchIds = [...new Set(updateUserDto.branchIds)];
+
+      if (uniqueBranchIds.length !== updateUserDto.branchIds.length) {
+        throw new BadRequestException('Duplicate branches are not allowed');
+      }
+
+      const branches = await this.prisma.branch.findMany({
+        where: {
+          id: {
+            in: updateUserDto.branchIds,
+          },
+        },
+      });
+
+      if (branches.length !== updateUserDto.branchIds.length) {
+        throw new BadRequestException('One or more branches are invalid');
+      }
+    }
+
     return await this.prisma.user.update({
       where: {
         id,
@@ -191,8 +231,13 @@ export class UsersService {
           email: updateUserDto.email,
         }),
 
-        ...(updateUserDto.branchId !== undefined && {
-          branchId: updateUserDto.branchId,
+        ...(updateUserDto.branchIds !== undefined && {
+          branches: {
+            set: [],
+            connect: updateUserDto.branchIds.map((id) => ({
+              id,
+            })),
+          },
         }),
 
         ...(updateUserDto.roleId && {

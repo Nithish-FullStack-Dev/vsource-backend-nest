@@ -1,4 +1,5 @@
 import {
+  ArrayUnique,
   IsArray,
   IsEmail,
   IsOptional,
@@ -18,10 +19,11 @@ export class CreateUser {
 
   @IsOptional()
   @IsArray()
+  @ArrayUnique()
   @IsUUID('4', { each: true })
   branchIds?: string[];
 
-  @IsString()
+  @IsUUID()
   roleId: string;
 
   constructor(
