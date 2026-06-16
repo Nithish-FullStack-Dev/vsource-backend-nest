@@ -103,30 +103,7 @@ export class LeadsService {
         remarks: dto.remarks,
 
         nextFollowup: dto.nextFollowup ? new Date(dto.nextFollowup) : null,
-        mbbsDetails:
-          dto.leadType === 'mbbs'
-            ? {
-                create: {
-                  address: dto.address,
-                  state: dto.state,
-                  city: dto.city,
-
-                  twelfthCollegeName: dto.twelfthCollegeName,
-                  twelfthMarks: dto.twelfthMarks,
-
-                  neetMarks: dto.neetMarks,
-
-                  ept: dto.ept,
-
-                  listeningScore: dto.listeningScore,
-                  readingScore: dto.readingScore,
-                  writingScore: dto.writingScore,
-                  speakingScore: dto.speakingScore,
-
-                  preferredUniversity: dto.preferredUniversity,
-                },
-              }
-            : undefined,
+       
       },
     });
   }
@@ -135,7 +112,6 @@ export class LeadsService {
       include: {
         branch: true,
         assignedCounselor: true,
-         mbbsDetails: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -151,7 +127,6 @@ export class LeadsService {
       include: {
         branch: true,
         assignedCounselor: true,
-         mbbsDetails: true,
       },
     });
   }
@@ -243,7 +218,6 @@ export class LeadsService {
       include: {
         branch: true,
         assignedCounselor: true,
-          mbbsDetails: true,
       },
     });
   }

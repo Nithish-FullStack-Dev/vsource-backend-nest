@@ -19,8 +19,7 @@ model User {
   email String @unique
   password String
 
-  branchId String?
-  branch Branch? @relation(fields: [branchId], references: [id])
+   branches Branch[]
 
   assignedLeads Lead[] @relation("CounselorLeads")
   assignedMbbsLeads MbbsLead[] @relation("MbbsCounselorLeads")
