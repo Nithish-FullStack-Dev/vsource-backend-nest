@@ -6,10 +6,22 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUser } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { User } from 'src/generated/prisma/client';
+
+export interface JwtPayload {
+  sub: string;
+  role: {
+    id: string;
+    name: string;
+  };
+}
 
 @Controller('user')
 export class UserController {
@@ -18,6 +30,12 @@ export class UserController {
   @Post('add')
   async CreateUser(@Body() createUser: CreateUser) {
     return await this.userService.createUser(createUser);
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async getCurrentUser(@CurrentUser() user: JwtPayload) {
+    return await this.userService.getCurrentUser(user.sub);
   }
 
   @Get('getAll')

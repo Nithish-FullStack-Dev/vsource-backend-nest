@@ -1,21 +1,25 @@
 // src/auth/auth.controller.ts
 
-import { Body, Controller, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  login(@Req() req: Request, @Body() credentials: LoginDto) {
-    console.log('RAW BODY =>', req.body);
-    console.log('DTO =>', credentials);
+  async login(
+    @Body() credentials: LoginDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return this.authService.login(credentials, response);
+  }
 
-    return this.authService.login(credentials);
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    return this.authService.logout(response);
   }
 
   // @Post('register')

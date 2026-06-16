@@ -1,120 +1,79 @@
-// import bcrypt from 'bcryptjs';
-// import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
 
-// import {
-//   PrismaClient,
-//   UserRole,
-// } from '../src/generated/prisma/client';
+import { PrismaClient } from '../src/generated/prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-// import { PrismaPg } from '@prisma/adapter-pg';
+dotenv.config();
 
-// dotenv.config();
+const databaseUrl = process.env.DATABASE_URL;
 
-// const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL missing');
+}
 
-// if (!databaseUrl) {
-//   throw new Error('DATABASE_URL missing');
-// }
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: databaseUrl,
+  }),
+});
 
-// const prisma = new PrismaClient({
-//   adapter: new PrismaPg({
-//     connectionString: databaseUrl,
-//   }),
-// });
+async function main() {
+  console.log('🌱 Seeding admin user...');
 
-// async function main() {
-//   console.log('🌱 Seeding database...');
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: 'admin@vsource.com',
+    },
+  });
 
-//   const dilsukhnagarBranch = await prisma.branch.upsert({
-//     where: {
-//       code: 'DSL',
-//     },
-//     update: {},
-//     create: {
-//       name: 'Dilsukhnagar',
-//       code: 'DSL',
-//       city: 'Hyderabad',
-//     },
-//   });
+  if (existingUser) {
+    console.log('ℹ️ Admin already exists');
+    return;
+  }
 
-//   const vijayawadaBranch = await prisma.branch.upsert({
-//     where: {
-//       code: 'VJA',
-//     },
-//     update: {},
-//     create: {
-//       name: 'Vijayawada',
-//       code: 'VJA',
-//       city: 'Vijayawada',
-//     },
-//   });
+  const adminRole = await prisma.role.findFirst({
+    where: {
+      name: 'Admin',
+    },
+  });
 
-//   const users = [
-//     {
-//       name: 'Super Admin',
-//       email: 'superadmin@vsourcecrm.com',
-//       password: 'SuperAdmin@123',
-//       role: UserRole.super_admin,
-//       branchId: null,
-//     },
+  if (!adminRole) {
+    throw new Error('Admin role not found');
+  }
 
-//     {
-//       name: 'Branch Admin',
-//       email: 'admin@vsourcecrm.com',
-//       password: 'Admin@123',
-//       role: UserRole.admin,
-//       branchId: dilsukhnagarBranch.id,
-//     },
+  const branches = await prisma.branch.findMany();
 
-//     {
-//       name: 'Counselor',
-//       email: 'counselor@vsourcecrm.com',
-//       password: 'Counselor@123',
-//       role: UserRole.counselor,
-//       branchId: vijayawadaBranch.id,
-//     },
-//   ];
+  const admin = await prisma.user.create({
+    data: {
+      name: 'Admin',
+      email: 'admin@vsource.com',
+      password: await bcrypt.hash('Vsource@123', 10),
 
-//   for (const user of users) {
-//     const existingUser = await prisma.user.findUnique({
-//       where: {
-//         email: user.email,
-//       },
-//     });
+      roleId: adminRole.id,
 
-//     if (existingUser) {
-//       console.log(
-//         `ℹ️ User already exists: ${user.email}`,
-//       );
-//       continue;
-//     }
+      branches: {
+        connect: branches.map((branch) => ({
+          id: branch.id,
+        })),
+      },
+    },
 
-//     await prisma.user.create({
-//       data: {
-//         name: user.name,
-//         email: user.email,
-//         password: await bcrypt.hash(
-//           user.password,
-//           10,
-//         ),
-//         role: user.role,
-//         branchId: user.branchId,
-//       },
-//     });
+    include: {
+      role: true,
+      branches: true,
+    },
+  });
 
-//     console.log(
-//       `✅ User created: ${user.email}`,
-//     );
-//   }
+  console.log('✅ Admin created');
+  console.log(admin.email);
+}
 
-//   console.log('✅ Seed completed');
-// }
-
-// main()
-//   .catch((error) => {
-//     console.error(error);
-//     process.exit(1);
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect();
-//   });
+main()
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

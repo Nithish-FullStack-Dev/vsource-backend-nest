@@ -1,5 +1,9 @@
 // vsource-backend-nest\src\users\users.service.ts
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUser } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -9,13 +13,55 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async getCurrentUser(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        branches: true,
+        role: {
+          include: {
+            modulePermissions: {
+              select: {
+                canCreate: true,
+                canDelete: true,
+                canRead: true,
+                canUpdate: true,
+                moduleId: true,
+                module: {
+                  select: {
+                    code: true,
+                    name: true,
+                    sortOrder: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
+  }
+
   async findByEmail(email: string) {
     return this.prisma.user.findUnique({
       where: {
         email,
       },
       include: {
-        branch: true,
+        branches: true,
         role: true,
       },
     });
@@ -49,11 +95,16 @@ export class UsersService {
         name: createUser.name,
         email: createUser.email,
         password: hashedPassword,
-        branchId: createUser.branchId,
         roleId: createUser.roleId,
+        branches: {
+          connect:
+            createUser.branchIds?.map((id) => ({
+              id,
+            })) ?? [],
+        },
       },
       include: {
-        branch: true,
+        branches: true,
         role: true,
       },
     });
@@ -62,7 +113,7 @@ export class UsersService {
   async getAllUsers() {
     return await this.prisma.user.findMany({
       include: {
-        branch: true,
+        branches: true,
         role: true,
       },
     });
@@ -74,7 +125,7 @@ export class UsersService {
         id,
       },
       include: {
-        branch: true,
+        branches: true,
         role: true,
       },
     });

@@ -17,8 +17,9 @@ export class CreateUser {
   password: string;
 
   @IsOptional()
-  @IsString()
-  branchId?: string;
+  @IsArray()
+  @IsUUID('4', { each: true })
+  branchIds?: string[];
 
   @IsString()
   roleId: string;
@@ -28,10 +29,10 @@ export class CreateUser {
     email: string,
     password: string,
     roleId: string,
-    branchId?: string,
+    branchIds?: string[],
   ) {
     this.name = name;
-    this.branchId = branchId;
+    this.branchIds = branchIds;
     this.email = email;
     this.password = password;
     this.roleId = roleId;

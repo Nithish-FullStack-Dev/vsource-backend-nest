@@ -78,6 +78,13 @@ export class RolesService {
             canRead: true,
             canUpdate: true,
             moduleId: true,
+            module: {
+              select: {
+                code: true,
+                name: true,
+                sortOrder: true,
+              },
+            },
           },
         },
       },
